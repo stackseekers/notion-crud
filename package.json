@@ -1,0 +1,27 @@
+{
+  "name": "notion-p",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:check-status": "node test-check-status.js",
+    "dev": "pnpm build && netlify dev",
+    "build": "cd frontend && npm run build",
+    "enable-blobs": "node enable-blobs.js",
+    "postinstall": "node enable-blobs.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "A comprehensive Netlify-based service that acts as a proxy to the Notion API, with direct file uploads and automated notifications",
+  "dependencies": {
+    "@netlify/blobs": "^9.1.6",
+    "busboy": "^1.6.0",
+    "dotenv": "^17.2.1",
+    "nodemailer": "^6.10.1"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  }
+}

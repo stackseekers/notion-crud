@@ -1,0 +1,59 @@
+[build]
+  functions = "netlify/functions"
+  publish = "public"
+  # Enable Netlify Blobs during build
+  command = "npm run enable-blobs"
+  # Exclude unnecessary files from build
+  ignore = "node_modules/**/*"
+
+[functions]
+  directory = "netlify/functions"
+  # Only include necessary files for functions
+  included_files = [
+    "netlify/functions/**/*",
+    "package.json",
+    "package-lock.json"
+  ]
+
+  [functions."check-status-changes"]
+  schedule = "*/2 * * * *"
+
+  [functions."upload-file"]
+  # This function uses Netlify Blobs for file storage
+  
+  [functions."blob"]
+  # This function serves files from Netlify Blobs
+
+  [functions.environment]
+  # Ensure Netlify provides Blobs context automatically
+  NETLIFY_BLOBS_ENABLED = "true"
+  # Force Netlify to provide Blobs context in runtime
+  NODE_ENV = "production"
+
+# Explicitly enable Netlify Blobs
+[blobs]
+  # This ensures Netlify Blobs is available for the site
+  # Netlify Blobs will be automatically enabled when this configuration is deployed
+
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Headers = "Content-Type, Notion-Version, Authorization, X-Requested-With"
+    Access-Control-Allow-Methods = "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+    Access-Control-Max-Age = "86400"
+
+# Handle client-side routing for SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Environment configuration for development
+[context.dev.environment]
+  # Netlify Blobs will be automatically configured during netlify dev
+  NODE_ENV = "development"
+
+[context.production.environment]
+  # Netlify automatically provides NETLIFY_SITE_ID and authentication
+  NODE_ENV = "production"
