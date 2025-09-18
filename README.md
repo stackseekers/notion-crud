@@ -1,4 +1,4 @@
-# notion-crud
+# Multi CRUD web app using Notion (FREE!  & NO CODING REQUIRED)
 A powerful, dynamic CRUD application that automatically adapts to your Notion database schema. Perfect for managing talent pools, job boards, and any other structured data in Notion.
 
 # Notion Web App - Simple Setup Guide
